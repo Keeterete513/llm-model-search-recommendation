@@ -6,7 +6,7 @@ Natural language search for ML models — built on 492 HuggingFace model cards u
 
 ## What it does
 
-Ask in plain English: *"lightweight model for sentiment analysis on social media"* — get a specific, grounded model recommendation with reasoning pulled directly from real HuggingFace model cards.
+Ask in plain English: *"lightweight model for sentiment analysis on social media"* - get a specific, grounded model recommendation with reasoning pulled directly from real HuggingFace model cards.
 
 ## Architecture
 ```
