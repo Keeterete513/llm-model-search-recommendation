@@ -26,7 +26,6 @@ Respond ONLY with a JSON array like this, no other text:
     )
     
     raw = response.json()["response"].strip()
-    # Extract JSON array from response
     start = raw.find("[")
     end = raw.rfind("]") + 1
     if start == -1 or end == 0:
@@ -39,14 +38,12 @@ Respond ONLY with a JSON array like this, no other text:
 
 if __name__ == "__main__":
     df = pd.read_parquet("../data/model_cards_clean.parquet")
-    
-    # Use top 100 models — enough for fine-tuning, fast to generate
-    df = df.head(100)
-    
+    df = df.head(1000)
+
     all_pairs = []
     failed = []
 
-    for _, row in tqdm(df.iterrows(), total=len(df)):
+    for i, (_, row) in enumerate(tqdm(df.iterrows(), total=len(df))):
         try:
             pairs = generate_qa(
                 row["model_id"],
@@ -57,10 +54,21 @@ if __name__ == "__main__":
         except Exception as e:
             failed.append(row["model_id"])
 
+        # Save every 100 models
+        if (i + 1) % 100 == 0:
+            temp_df = pd.DataFrame(all_pairs)
+            if len(temp_df) > 0:
+                temp_df["answer"] = temp_df["answer"].apply(lambda x: x if isinstance(x, str) else str(x))
+                temp_df["question"] = temp_df["question"].apply(lambda x: x if isinstance(x, str) else str(x))
+                temp_df.to_parquet("../data/qa_pairs_temp.parquet", index=False)
+                print(f"\nCheckpoint saved at model {i+1} — {len(temp_df)} pairs so far")
+
     print(f"\nGenerated {len(all_pairs)} Q&A pairs | Failed: {len(failed)}")
-    
+
     qa_df = pd.DataFrame(all_pairs)
+    qa_df["answer"] = qa_df["answer"].apply(lambda x: x if isinstance(x, str) else str(x))
+    qa_df["question"] = qa_df["question"].apply(lambda x: x if isinstance(x, str) else str(x))
     qa_df.to_parquet("../data/qa_pairs.parquet", index=False)
-    
+
     print("\nSample pairs:")
     print(qa_df[["question", "answer"]].head(3).to_string())

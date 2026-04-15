@@ -3,7 +3,7 @@ import pandas as pd
 from tqdm import tqdm
 import time
 
-def fetch_model_cards(parquet_path, limit=500):
+def fetch_model_cards(parquet_path, limit=5000):
     df = pd.read_parquet(parquet_path)
     df = df.head(limit)
 
@@ -31,6 +31,6 @@ def fetch_model_cards(parquet_path, limit=500):
     return pd.DataFrame(cards)
 
 if __name__ == "__main__":
-    df = fetch_model_cards("../data/models_metadata.parquet", limit=500)
+    df = fetch_model_cards("../data/models_metadata.parquet", limit=5000)
     df.to_parquet("../data/model_cards.parquet", index=False)
     print(df[["model_id", "card_text"]].head(3))
